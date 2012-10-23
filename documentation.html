@@ -1,0 +1,187 @@
+---
+layout: default
+doc: "active"
+title: "CIBuddy Documentation"
+description: "CIBuddy documentation describing the usage and common pitfalls."
+--- 
+
+        <!-- Subhead
+        ================================================== -->
+        <header class="jumbotron subhead" id="overview">
+          <div class="container">
+            <!-- project logo -->
+            <p class="lead">
+              <img src="img/CIBuddyHeader_documentation.png" alt="Documentation Page" />
+            </p>
+             <!-- spacer between logo and first content of page -->
+            <hr />
+             <!-- lead text for the motivation -->
+            <p class="lead">
+              
+            </p>
+          </div>
+        </header>
+        <!-- main content of page -->
+
+        <div class="container">
+            <div class="row">
+                <div class="span3 bs-docs-sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav affix">
+                        <li><a href="#install"><i class="icon-chevron-right"></i> Install</a></li>
+                        <li><a href="#install_demo_efd"><i class="icon-chevron-right"></i> Install a Demo Light</a></li>
+                        <li><a href="#test_efd"><i class="icon-chevron-right"></i> Test your EFD</a></li>
+                        <li><a href="#oss_server"><i class="icon-chevron-right"></i> Point to an OSS CI Server</a></li>
+                        <li><a href="#def_test_server"><i class="icon-chevron-right"></i> Point to your CI Backend</a></li>
+                        <li><a href="#def_test_conf"><i class="icon-chevron-right"></i> Defining a Test Configuration</a></li>
+                    </ul>
+                </div>
+                <div class="span9">
+                  <section id="install">
+                    <div class="page-header">
+                      <h1>Installation</h1>
+                    </div>
+                        
+                    <p>To get started, just grab the latest binary <a href="https://github.com/cibuddy/cibuddy/downloads" title="CIBuddy Binary Downloads">here</a>. Unzip or un-tar the binary, change to the bin directory and start the application with <code>karaf</code> or <code>karaf.bat</code> (windows). The output on your console should look like the following:</p>
+
+                    <pre class="prettyprint"><code>titan:bin mirkojahn$ ./karaf
+        __ __                  ____      
+       / //_/____ __________ _/ __/      
+      / ,&lt;  / __ `/ ___/ __ `/ /_        
+     / /| |/ /_/ / /  / /_/ / __/        
+    /_/ |_|\__,_/_/   \__,_/_/         
+
+  Apache Karaf (2.2.9)
+
+Hit '&lt;tab&gt;' for a list of available commands
+and '[cmd] --help' for help on a specific command.
+Hit '&lt;ctrl-d&gt;' or 'osgi:shutdown' to shutdown Karaf.
+
+karaf@CIBuddy&gt;</code></pre>
+                    <p>Now you're all set to configure your system</p>
+
+                  </section>
+                  <section id="install_demo_efd">
+                    <div class="page-header">
+                      <h1>Install a Demo Light</h1>
+                    </div>
+                    <p>In case you don't have a hardware light, you could as well use the provided demo light (a simple Swing application indicating the status as a colored circle). To install the demo light, just enter:</p>
+
+                    <pre class="prettyprint"><code>karaf@CIBuddy&gt; feature:install cibuddy-swing-xfd</code></pre>
+
+                    <p>After executing the command you should see a swing application window appear. This is your "software indicator" you could use like a hardware indicator to simulate the behavior, in case you don't have a real one at hand.</p>
+
+                  </section>
+                  <section id="test_efd">
+                    <div class="page-header">
+                      <h1>Test your eXtreme Feedback Device</h1>
+                    </div>
+                    <p>If you have an i-Buddy or a Delcom Light, just connect it to your computer. You could check if this worked, simply enter the following line:</p>
+
+                    <pre class="prettyprint"><code>karaf@CIBuddy&gt; cib:list-efds</code></pre>
+
+                    <p>The output should look similar to the one below, however, depending on your connected devices, details might vary of course. The example sports 2 devices, one for a Delcom USB Light (Generation II) and an i-Buddy (with blue and green wings - Generation II).</p>
+
+                    <pre class="prettyprint"><code>karaf@CIBuddy&gt; cib:list-efds 
+eXtreme Feedback Device : [0] com.cibuddy.delcom.lights.impl:G2
+eXtreme Feedback Device : [1] com.cibuddy.ibuddy.impl:iBuddyG2</code></pre>
+
+                    <p>Testing the connected devices is also pretty straigth forward. Again you could use the command line. This time use the following command to let CIBuddy go through each connected device and trigger the various states they might have to indicate:</p>
+
+                    <pre class="prettyprint"><code>karaf@CIBuddy&gt; cib:test-efd 
+Disclaimer: Not all devices support all actions!
+Testing eXtreme Feedback Device: [0] com.cibuddy.delcom.lights.impl:G2
+com.cibuddy.delcom.lights.impl.DelcomLightHandle@48b9e55c
+Indicating SUCCESS
+Indicating WARNING
+Indicating BUILDING
+Indicating FAILURE
+Indicating OFF
+Testing eXtreme Feedback Device: [0] com.cibuddy.ibuddy.impl:iBuddyG2
+com.cibuddy.ibuddy.impl.IBuddyLightHandle@1970b890
+Indicating SUCCESS
+Indicating WARNING
+Indicating BUILDING
+Indicating FAILURE
+Indicating OFF</code></pre>
+
+
+                  </section>
+                  <section id="oss_server">
+                    <div class="page-header">
+                      <h1>Point to an OSS CI Server</h1>
+                    </div>
+
+                    <p>Now, in order to access the status of a build, we have to introduce the CI environments to CIBuddy, by configuring the server addresses to check. This could be done by copying *.jenkins or *.travis files into the deploy folder or with an exiting feature (for known OSS Server) through the console:</p>
+
+                    <pre class="prettyprint"><code>karaf@CIBuddy&gt; feature:install cibuddy-oss-conf</code></pre>
+
+                    <p>Shortly after two servers are promoted in the system. The Apache and the Travis build server to be specific. You could use the command line to actually verify that:</p>
+
+                    <pre class="prettyprint"><code>karaf@CIBuddy&gt; cib:list-server 
+Server : [0] org.apache=https://builds.apache.org/ type: Jenkins version: 1.480]
+Server : [1] travis-ci=http://www.travis-ci.org type: Travis-CI version: unknown]</code></pre>
+
+
+                  </section>
+                  <section id="def_test_server">
+                    <div class="page-header">
+                      <h1>Point to your CI Backend</h1>
+                    </div>
+                    <p>
+                      Usually, you don't want to setup your eXtreme Feedback Device to indicate the status of your own builds and chances are good that these are not part of the provided OSS servers. You have to let CIBuddy know where your CI servers are located. This is done very easily. All you need to do is to create a properties file for each server type (like jenkins, travis, hudson...) and list the CI servers containing tests you're interested in as key value pairs. The key is later used in the actual configuration to link a test project with a server (where the project is located). Below is a list of the available <i>server - file ending</i> mapping.
+                    </p>
+                    <ul>
+                      <li>Jenkins-CI (and Hudson): <code>*.jenkins</code></li>
+                      <li>Travis-CI: <code>*.travis</code></li>
+                      <!--li>Jenkins-CI: <code>*.jenkins</code></li-->
+                    </ul>
+                    <p>The typical content looks like this</p>
+
+                    <pre class="prettyprint"><code>org.apache=https://builds.apache.org/</code></pre>
+
+                    <p>
+                      Once you have all files prepared, you could just place them in the <code>deploy</code> folder and CIBuddy will pick them up and install them accordingly. Deleting those folders or updating them will result in a removal or update of the configuration in CIBuddy as well. 
+                    </p>
+
+                    <blockquote>
+                      <p><strong>Please note:</strong> CIBuddy currently does not support authentication against CI Servers. Thus the job status must be visible to everyone.</p>
+                    </blockquote>
+
+                  </section>
+                  <section id="def_test_conf">
+                    <div class="page-header">
+                      <h1>Define a Test Configuration</h1>
+                    </div>
+
+                    <p>Finally to wire everything together with a real configuration, you could either adapt one of the samples located in the <code>sample</code> folder and copy the file then into the <code>deploy</code> folder or you could start with the basic cibuddy test environment configuration prepackaged as a feature. The latter could be done like this:</p>
+
+                    <pre class="prettyprint"><code>karaf@CIBuddy&gt; feature:install cibuddy-test-conf</code></pre>
+
+                    <p>Shortly after the deployment your light should indicate the current build status. In order for this to work, you need internet access of course. </p>
+
+                    <blockquote>
+                      <p><strong>Please note:</strong> features could easily be uninstalled by using the same command with <code>uninstall</code> instead of <code>install</code>.</p>
+                    </blockquote>
+
+                    <p>For your own configuration you have to provide a customized xml file similar to the one listed below:</p>
+
+                    <pre class="prettyprint linenums"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;setup  xmlns="http://com.cibuddy.project.configuration/schema/projects/v1-0" 
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+    
+    &lt;!-- config, server and indicator attribute are optional --&gt;
+    &lt;xfd name="test-cibuddy-on-travis" server="travis-ci"&gt;
+        &lt;!-- the first project to check --&gt;
+        &lt;project id="cibuddy/cibuddy"/&gt;
+        &lt;!-- the second project to check --&gt;
+        &lt;project id="twilio/twilio-java"/&gt;
+        &lt;!-- the third project to check, but this time from a different server --&gt;
+        &lt;project server="org.apache" id="Felix-FileInstall"/&gt;
+    &lt;/xfd&gt;
+&lt;/setup&gt;</code></pre>
+                      <p>The schema on which this configuration file is based could be found <a href="https://github.com/cibuddy/cibuddy/blob/master/main/project.configuration/src/main/resources/projects-1.0.xsd">here</a>.</p>
+                  </section>
+                </div>
+            </div>
+        </div> <!-- container -->

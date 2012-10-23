@@ -1,0 +1,255 @@
+---
+layout: default
+faq: "active"
+title: "CIBuddy FAQ"
+description: "CIBuddy Frequently Asked Questions."
+--- 
+
+        <!-- Subhead
+        ================================================== -->
+        <header class="jumbotron subhead" id="overview">
+          <div class="container">
+            <p class="lead">
+                <img src="img/CIBuddyHeader_faq.png" alt="FAQ Page" />
+            </p>
+             <!-- lead text for the motivation -->
+             <hr />
+            <hr />
+          </div>
+        </header>
+
+
+        <!-- main content of page -->
+        <div class="container">
+            <div class="row">
+                <div class="span3 bs-docs-sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav affix">
+                        <li><a href="#general"><i class="icon-chevron-right"></i> General</a></a>
+                        <li><a href="#linux"><i class="icon-chevron-right"></i> Linux</a></li>
+                        <li><a href="#windows"><i class="icon-chevron-right"></i> Windows</a></li>
+                        <li><a href="#mac"><i class="icon-chevron-right"></i> Mac OS X</a></li>
+                        <!-- Nothing right now in these categories
+                        <li><a href="#install"><i class="icon-chevron-right"></i> Installation Related</a></li>
+                        <li><a href="#configuration"><i class="icon-chevron-right"></i> Configuration Related</a></li>
+                        -->
+                        <li><a href="#devices"><i class="icon-chevron-right"></i> Device Support</a></li>
+                    </ul>
+                </div>
+                <div class="span9">
+                    <!-- 
+
+                                Linux related FAQ's
+
+                    -->
+                    <section id="general">
+                        <div class="page-header">
+                            <h1>General CIBuddy related Questions</h1>
+                        </div>
+                        <h2 id="cib_license">What License is CIBuddy using and do I have to care when using it?</h2>
+                        <p>
+                            CIBuddy code is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0 (aka ASL 2.0)</a>. The HID driver however is an exception and licensed under a very liberal <a href="http://code.google.com/p/javahidapi/source/browse/LICENSE-orig.txt?r=5b0e28cad47110c6b5731db5451767bc2084c3ea" target="_blank">Source Attribution</a> license.
+                        </p>
+                        <p> 
+                            Based on this licensing model there is practically no limitation on using the binaries. You could deploy them where ever you seem fit and even charge for them - it is up to you. In case you are planning on reusing part of the code - this is also fine (even for commercial use). The used licenses are not viral, so you don't have to be afraid of business implications - you don't even have to publish changed code. In case even this liberal license is not fitting you're needs, just drop us a note and we'll work something out.
+                        </p>
+                        <hr class="bs-docs-separator">
+                        <h2 id="cib_contact">I have a question...</h2>
+                        <p>
+                            Well, in case you have a question that is neither answered by this FAQ, nor the <a href="documentation.html">Documentation</a> page, you could drop us a tweet @CIBuddy or write an e-mail to mirkojahn "at" gmail.com. Bugs and open issues should be directed to this page: <a href="https://github.com/cibuddy/cibuddy/issues?direction=desc&milestone=3&page=1&state=open">https://github.com/cibuddy/cibuddy/issues</a>.
+                        </p>
+                    </section>
+                    <!-- 
+
+                                Linux related FAQ's
+
+                    -->
+                    <section id="linux">
+                        <div class="page-header">
+                            <h1>Linux Specific
+                            </h1>
+                        </div>
+                        <h2 id="cib_2devices">Multiple Devices exposed for one i-Buddy</h2>
+                        <p>
+                            Requesting information about the usage page of a connected device is rather expensive and so the libusb devoloper decided to not implement this feature. The i-buddy unfortunately exposes two HID interfaces per device which are other wise not distinguishable. As a work
+                            around one could just test which device is working on the console by typing <code>cib:test-efd X</code>, where X is the number of the device. If the device is working property, different color are indicated on the device and printed to the console for reference.
+                        </p>
+                        <hr class="bs-docs-separator">
+                        <h2 id="cib_accessException">No eXtreme Feedback Devices are discovered</h2>
+                        <p>
+                            When connecting an eXtreme Feedback Device with USB to your computer it is not picked up within a couple of seconds (15 should be fine usually, even for ARM base systems). Executing the command <code>cib:list-efds</code> returns no devices. This could have multiple reasons. 
+                        </p>
+                        <h3>Missing Permissions</h3>
+                        <p>
+                            The first an most simple one might be missing permissions. Try shutting down CIBuddy ("CTRL"+"D") and starting it again by calling <code>sudo ./karaf</code>. In case this works, you did not have access rights for the USB device. Either you continue using <i>sudo</i> (not recommended) or you define a <i>udev</i> rule, like described <a href="http://www.libusb.org/wiki/FAQ#CanIrunLinuxlibusbapplicationswithoutrootrootprivilege">here</a>. A configuration file with some more details is located <a href="https://github.com/signal11/hidapi/blob/master/udev/99-hid.rules">here</a> and a template for supported devices by CIBuddy could be found <a href="https://github.com/cibuddy/cibuddy/blob/master/distributions/karaf.assembly/src/main/resources/support/cibuddy-udev.rules">here</a>.
+                        </p>
+                        <h3>Missing or wrong driver versions of libusb</h3>
+                        <p>
+                            CIBuddy using a native library to access the HID stack on top of USB. In order to access and connect to the USB stack libusb-1.0 has to be installed. Use your package manager to actually install the library. On Ubuntu for instance you could try something like this:.
+                        </p>
+                        <code>
+                            sudo apt-get install libusb-1.0-0
+                        </code>
+                        <p>
+                            In case this doesn't work you could also try the dev version:
+                        </p>
+                        <code>
+                            sudo apt-get install libusb-1.0-0-dev
+                        </code>
+                    </section>
+                    
+                    <hr class="bs-docs-separator">
+                    <!-- 
+
+                                Windows related FAQ's
+
+                    -->
+                    <section id="windows">
+                        <div class="page-header">
+                            <h1>Windows Specific</h1>
+                        </div>
+                        <h2 id="cib_doesntstart">CIBuddy does not start</h2>
+                        <p>
+                            When checking the console for started bundles (by entering <code>la</code>), various bundles are in the <strong>installed</strong> state and never get resolved or started. This is a known problem on some windows system. The easiest work around is to manually start all bundles that are in the <strong>installed</strong> state. 
+                        </p>
+                        <!-- TODO: describe how that looks like on the console, show the command to fix this -->
+                        <p>
+                            In case the cibuddy feature is not automatically installed, once you started all existing bundles, you have to manually install the cibuddy feature. This is easily achieved by calling this: <code>feature:install cibuddy-main</code>
+                        </p>
+                        
+                        <hr class="bs-docs-separator">
+                        <h2 id="cib_winservice">How could I install CIBuddy as a Windows service?</h2>
+                        <p>
+                            In order to run CIBuddy as a service (no matter which OS), just execute the following command lines: 
+                        </p>
+<pre class="prettyprint linenums" id="lang-bash">CIBuddy@root> features:install wrapper
+CIBuddy@root> wrapper:install -s AUTO_START -n CIBDUDDY -d CIBuddy -D "CIBuddy Service"</pre>
+                        <p>
+                            This command will install a Windows service called <strong>CIBuddy Service</strong> that is started automatically.
+                        </p>
+                    </section>
+                    <hr class="bs-docs-separator">
+                    <!-- 
+
+                                Mac related FAQ's
+
+                    -->
+                    <section id="mac">
+                        <div class="page-header">
+                            <h1>Mac Specific</h1>
+                        </div>
+                        <h2 id="cib_doesntstartosx">I can't start CIBuddy on OS X 10.8 (Mountain Lion)</h2>
+                        <p>
+                            With OS X 10.8 Apple introduced a new security system called GateKeeper, which requires all applications to be signed in order to run without user intervention. Java applications are also affected and need to be signed. CIBuddy is currently not signed with an Apple certificate, which would cost an annual fee. However, every release (not SNAPSHOTS) is signed with a pgp key to proof its source. 
+                        </p>
+                        <p>
+                            A work around to install CIBuddy is to right-click and select "open" or disable GateKeeper all together by selecting <strong>Anywhere</strong> for the <i>Allow applications downloaded from:</i> menu (not recommended!!!).
+                        </p>
+                        <img src="./img/faq_mac_GateKeeper_conf_dialog.png">
+                    </section>
+                    <!-- Nothing for now... 
+                    <hr class="bs-docs-separator">
+                    <section id="install">
+                        <div class="page-header">
+                            <h1>Installation Related</h1>
+                        </div>
+                    </section>
+                    <hr class="bs-docs-separator">
+                    <section id="configuration">
+                        <div class="page-header">
+                            <h1>Configuration Related</h1>
+                        </div>
+                        - What CI servers are supported?
+                        - How could I change the behavior of the efd?
+                    </section>
+                    -->
+                    <hr class="bs-docs-separator">
+                    <section id="devices">
+                        <div class="page-header">
+                            <h1>Devices</h1>
+                        </div>
+                        <h2 id="cib_devicesupport">What devices are currently supported?</h2>
+                        <p>
+                            Besides software wrappers (like the demo light as part of CIBuddy), various <abbr title="USB human interface device class">USB HID class</abbr> devices are supported out of the box and work right away. The list these devices is illustrated in the table below.
+                        </p>
+                        <table class="table table-hover">
+                          <caption>Supported HID Device List of CIBuddy</caption>
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>VendorId/ProductId</th>
+                              <th>Status</th>
+                              <th>Pricerange</th>
+                              <th>Picture</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><a href="http://www.delcomproducts.com/products_USBLMP.asp" alt="external: Delcomproducts homepage" target="_blank">Delcom USB Light GenII</a></td>
+                              <td><abbr title="ProductId: 4037/ VendorId: 45184 (decimal)">4037/45184</abbr></td>
+                              <td><span class="label label-success">Successfully tested</span></td>
+                              <td>86-100 US Dollar</td>
+                              <td class="feature-logo"></td>
+                            </tr>
+                            <tr>
+                              <td><a href="http://www.delcomproducts.com/products_USBLMP.asps" alt="external: Delcomproducts homepage" target="_blank">Delcom USB Light GenI</a></td>
+                              <td><span class="label">unknown</span></td>
+                              <td><span class="label label-important">NOT compatible</span></td>
+                              <td>86-100 US Dollar</td>
+                              <td class="feature-logo"></td>
+                            </tr>
+                            <tr>
+                              <td><a href="http://www.i-buddy.com/" alt="external: i-Buddy homepage by Union Creations Limited" target="_blank">i-Buddy 1st Generation</a></td>
+                              <td><abbr title="ProductId: 4400/ VendorId: 0001 (decimal)">4400/0001</abbr></td>
+                              <td><span class="label label-success">Successfully tested</span></td>
+                              <td>8-15 Euro</td>
+                              <td class="feature-logo"></td>
+                            </tr>
+                            <tr>
+                              <td><a href="http://www.i-buddy.com/" alt="external: i-Buddy homepage by Union Creations Limited" target="_blank">i-Buddy 2nd Generation</a></td>
+                              <td><abbr title="ProductId: 4400/ VendorId: 0002 (decimal)">4400/0002</abbr></td>
+                              <td><span class="label label-success">Successfully tested</span></td>
+                              <td>5-20 Euro</td>
+                              <td class="feature-logo"><img src="img/i-buddy-2nd_red.png" alt="2nd Generation i-buddy with red glowing head - indicating failure." /></td>
+                            </tr>
+                            <tr>
+                              <td><a href="http://www.i-buddy.com/" alt="external: i-Buddy homepage by Union Creations Limited" target="_blank">Black i-Buddy</a></td>
+                              <td><abbr title="ProductId: 4400/ VendorId: 0003 (decimal)">4400/0003</abbr></td>
+                              <td><span class="label label-success">Successfully tested</span></td>
+                              <td>12-20 Euro</td>
+                              <td class="feature-logo"></td>
+                            </tr>
+                            <tr>
+                              <td><a href="http://www.i-buddy.com/" alt="external: i-Buddy homepage by Union Creations Limited" target="_blank">"unknown" i-Buddy</a></td>
+                              <td><abbr title="ProductId: 4400/ VendorId: 0004 (decimal)">4400/0004</abbr></td>
+                              <td><span class="label label-info">Not tested</span></td>
+                              <td><span class="label">unknown</span></td>
+                              <td class="feature-logo"></td>
+                            </tr>
+                            <tr>
+                              <td><a href="http://www.i-buddy.com/" alt="external: i-Buddy homepage by Union Creations Limited" target="_blank">i-Buddy Devil</a></td>
+                              <td><abbr title="ProductId: 4400/ VendorId: 0005 (decimal)">4400/0005</abbr></td>
+                              <td><span class="label label-success">Successfully tested</span></td>
+                              <td>8-20 Euro</td>
+                              <td class="feature-logo"></td>
+                            </tr>
+                            <tr>
+                              <td><a href="http://www.i-buddy.com/" alt="external: i-Buddy homepage by Union Creations Limited" target="_blank">i-Buddy Queen</a></td>
+                              <td><abbr title="ProductId: 4400/ VendorId: 0006 (decimal)">4400/0006</abbr></td>
+                              <td><span class="label label-success">Successfully tested</span></td>
+                              <td>15-30 Euro</td>
+                              <td class="feature-logo"><img src="img/i-Buddy_Queen_success.png"  alt="Queen i-buddy with green glowing head and red heart - indicating success."/></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                        <!-- Questions:
+                            - What devices are supported
+                            - How do I know what i-Buddy version I have?
+                            - 
+                        -->
+                    </section>
+                </div>
+            </div>
+            
+
+        </div> <!-- /container -->

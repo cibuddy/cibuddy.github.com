@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>{{ page.title }}</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="{{ page.description }}"/>
+        <meta name="author" content="Mirko Jahn"/>
+        <meta property="og:description" content="The continuous integration server status visualization application. Build visualization with fun and ease." />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:title" content="CIBuddy - build visualization with fun and ease." />
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://www.cibuddy.com/" />
+        <meta property="og:site_name" content="CIBuddy" />
+        <meta name="robots" content="index, follow" />
+        <!-- Disable cache control for now
+        <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" /> 
+        <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
+        -->
+        <link href="css/bootstrap.css" rel="stylesheet" />
+        <link href="css/custom.css" rel="stylesheet" />
+        <link href="google-code-prettify/sons-of-obsidian.css" type="text/css" rel="stylesheet" />
+        <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- fav icon -->
+        <link rel="shortcut icon" href="favicon.ico" />
+        <script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+        
+    </head>
+    <body data-spy="scroll" data-target=".bs-docs-sidebar" onload="prettyPrint()">
+        <!-- fork me on github link/ graphic -->
+        <a href="https://github.com/cibuddy/cibuddy" target="_blank"><img style="position: absolute; top: 40px; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+        <!-- Navigation -->
+
+
+        <!-- header -->
+        <!-- Navbar
+        ================================================== -->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <a class="brand" href="./index.html">CI<b class="buddy">Buddy</b></a>
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                  <li class="{{page.home}}">
+                    <a href="./index.html">Home</a>
+                  </li>
+                  <li class="{{page.doc}}">
+                    <a href="./documentation.html">Documentation</a>
+                  </li>
+                  <li class="{{page.faq}}">
+                    <a href="./faq.html">FAQ</a>
+                  </li>
+                  <li class="{{page.download}}">
+                    <a href="./download.html">Downloads</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+            {{ content }}
+
+        <hr />
+        <!-- footer section -->
+        <footer class="footer">
+            <div class="container">
+                <p>
+                    <b>&copy;</b> CI<b><span class="buddy">Buddy</span></b> by Mirko Jahn <b>2012</b> 
+                </p>
+                <p>
+                    CIBuddy code is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. The HID driver however is an exception and licensed under a very liberal <a href="http://code.google.com/p/javahidapi/source/browse/LICENSE-orig.txt?r=5b0e28cad47110c6b5731db5451767bc2084c3ea" target="_blank">Source Attribution</a> license. <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CIBuddy documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.cibuddy.com" property="cc:attributionName" rel="cc:attributionURL">cibuddy.com</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>. Some pictures in the header are licensed from <a href="http://www.istockphoto.com" target="_blank">istockphoto.com</a> and remain under their commercial licensing terms.<br/>
+                    The website was created with love and the help of <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">bootstrap</a> and <a href="http://jquery.com/" target="_blank">jQuery</a>.
+                </p>
+                 <!-- row of columns -->
+                <div class="row">
+                    <div class="span3">&nbsp;</div>
+                    <div class="span6">
+                      <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=cibuddy&amp;repo=cibuddy&amp;type=watch&amp;count=true" frameborder="0" scrolling="no" width="112" height="20"></iframe>
+                      <a href="https://twitter.com/cibuddy" class="twitter-follow-button" data-dnt="true" data-show-count="false">Follow @cibuddy</a>
+                    </div>
+                    <div class="span3">&nbsp;</div>
+                </div>
+
+            </div>
+        </footer> <!-- /footer section -->
+
+
+        <!-- ========================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <!-- ========================================================== -->
+
+        <script src="js/jquery-1.8.0.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/custom.js"></script>
+
+    </body>
+</html>

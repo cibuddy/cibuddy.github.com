@@ -1,0 +1,10 @@
+ 		  <div class="container">
+            <!-- project logo -->
+            <p class="lead"><img src="img/CIBuddyHeader_home.png" alt="CIBuddy"/></p>
+             <!-- spacer between logo and first content of page -->
+            <hr />
+             <!-- lead text for the motivation -->
+            <p class="lead">
+              CIBuddy is the number one open source application to turn to when deploying eXtreme feedback devices within your team or company. It is not only capable of connecting to the most popular build servers, but also supports various eXtreme feedback devices out of the box.
+            </p>
+          </div>
