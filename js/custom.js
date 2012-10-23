@@ -4,11 +4,11 @@ $(document).ready(function(){
 })
 // swap images (build servers)
 function rotateImages(){
-  var $active = $('.ciRotate .active');
-  var $next = ($('.ciRotate .active').next().length > 0) ? $('.ciRotate .active').next() : $('.ciRotate img:first');
+  var $active = $('.ciRotate .ciActive');
+  var $next = ($('.ciRotate .ciActive').next().length > 0) ? $('.ciRotate .ciActive').next() : $('.ciRotate img:first');
   $active.fadeOut(function(){
-    $active.removeClass('active').css({ "display": "none" });
-    $next.fadeIn().addClass('active').css({ "display": "block" });
+    $active.removeClass('ciActive').css({ "display": "none" });
+    $next.fadeIn().addClass('ciActive').css({ "display": "block" });
   });
 }
 // twitter button script
