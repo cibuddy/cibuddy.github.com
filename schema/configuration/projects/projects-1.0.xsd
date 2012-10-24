@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2012 Mirko Jahn <mirkojahn@gmail.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:this="http://com.cibuddy/schema/configuration/projects"
+           targetNamespace="http://com.cibuddy/schema/configuration/projects"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+    <xs:annotation>
+        <xs:appinfo>
+            <jaxb:schemaBindings>
+                <jaxb:package name="com.cibuddy.project.configuration.jaxb.v1_0.setup"/>
+            </jaxb:schemaBindings>
+        </xs:appinfo>
+    </xs:annotation>
+    
+    <xs:element name="setup">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="xfd" type="this:ExtremeFeedbackDeviceType" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="ExtremeFeedbackDeviceType">
+        <xs:annotation>
+            <xs:appinfo>
+                <jaxb:class name="Xfd"/>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="project" type="this:ProjectType" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+        <xs:attribute name="server" type="xs:string" use="optional"/>
+        <xs:attribute name="config" type="xs:string" use="optional" default="default" />
+        <xs:attribute name="indicatorId" type="xs:string" use="optional" default="0" />
+    </xs:complexType>
+    <xs:complexType name="ProjectType">
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="server" type="xs:string" use="optional"/>
+    </xs:complexType>
+</xs:schema>
