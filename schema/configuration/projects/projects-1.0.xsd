@@ -17,8 +17,8 @@
 
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-           xmlns:this="http://com.cibuddy/schema/configuration/projects"
-           targetNamespace="http://com.cibuddy/schema/configuration/projects"
+           xmlns:this="http://cibuddy.com/schema/configuration/projects"
+           targetNamespace="http://cibuddy.com/schema/configuration/projects"
            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
