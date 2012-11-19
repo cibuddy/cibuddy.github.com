@@ -166,9 +166,9 @@ Server : [1] travis-ci=https://travis-ci.org type: Travis-CI version: unknown]</
                     <p>For your own configuration you have to provide a customized xml file similar to the one listed below:</p>
 
                     <pre class="prettyprint linenums"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;setup  xmlns="http://com.cibuddy.project.configuration/schema/projects/v1-0" 
-         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+&lt;setup  xmlns="http://cibuddy.com/schema/configuration/projects" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation='http://cibuddy.com/schema/configuration/projects http://cibuddy.com/schema/configuration/projects/projects-1.0.xsd'&gt;
     
     &lt;!-- config, server and indicator attribute are optional --&gt;
     &lt;xfd name="test-cibuddy-on-travis" server="travis-ci"&gt;
