@@ -33,6 +33,7 @@ description: "CIBuddy documentation describing the usage and common pitfalls."
                         <li><a href="#oss_server"><i class="icon-chevron-right"></i> Point to an OSS CI Server</a></li>
                         <li><a href="#def_test_server"><i class="icon-chevron-right"></i> Point to your CI Backend</a></li>
                         <li><a href="#def_test_conf"><i class="icon-chevron-right"></i> Defining a Test Configuration</a></li>
+                        <li><a href="#conf_security"><i class="icon-chevron-right"></i> Securing the installation</a></li>
                     </ul>
                 </div>
                 <div class="span9">
@@ -181,6 +182,14 @@ Server : [1] travis-ci=https://travis-ci.org type: Travis-CI version: unknown]</
     &lt;/xfd&gt;
 &lt;/setup&gt;</code></pre>
                       <p>The schema on which this configuration file is based could be found <a href="https://github.com/cibuddy/cibuddy/blob/master/main/project.configuration/src/main/resources/projects-1.0.xsd">here</a>.</p>
+                  </section>
+                  <section id="doc_security">
+                    <div class="page-header">
+                      <h1>Configure Security</h1>
+                    </div>
+                    <p>
+                      The installation of cibuddy is based on a vanilla karaf osgi container. By default this container has an exposed ssh port, various MBeans and a WebConsole running. All of these are accessible by the default passwords defined in karaf itself. However, these could be changed very easily following the <a href="http://karaf.apache.org/manual/2.3.0/users-guide/security.html">Karaf Security Manual</a>.
+                    </p>
                   </section>
                 </div>
             </div>
