@@ -29,28 +29,70 @@ description: "CIBuddy download page with links to various download options, rang
 
             <div class="row">
                 <div class="span3 bs-docs-sidebar">
-                    <ul class="nav nav-list bs-docs-sidenav affix">
-                        <li><a href="#general"><i class="icon-chevron-right"></i> Main</a></li>
-                        <li><a href="#snapshot"><i class="icon-chevron-right"></i> SNAPSHOT</a></li>
-                        <li><a href="#1.0.0"><i class="icon-chevron-right"></i> 1.0.0</a></li>
-                    </ul>
+                  <ul class="nav nav-list bs-docs-sidenav affix-top">
+                    <li><a href="#1.0.0"><i class="icon-chevron-right"></i> 1.0.0</a></li>
+                    <li><a href="#snapshot"><i class="icon-chevron-right"></i> SNAPSHOT</a></li>
+                    <li><a href="#maven"><i class="icon-chevron-right"></i> Maven Repository</a></li>
+                  </ul>
                 </div>
                 <div class="span9">
-                	<section id="general">
-			        	<div class="page-header">
-		                    <h1>Main Download Locations <small>:: continously updated</small></h1>
-		                <p>
-		                	Binaries from various versions could be obtained from two different locations basically. Each of these locations will contain the very same artifacts, because they are distributed automatically. Depending on your preferred way of consuming the software you could choose either one.
-		                </p>
-		                </div>
-		                <h3>Github:<a href="https://github.com/cibuddy/cibuddy/downloads" class="btn btn-success pull-right">Download @github.com</a></h3>
-		                <p>
-		                	Alongside the sources all released versions could be found on the downloads page of the CIBuddy project on GitHub <a href="https://github.com/cibuddy/cibuddy/downloads" target="_blank">here</a>.
-		                </p>
-		                <h3>Maven:<a href="https://oss.sonatype.org/content/groups/public/com/cibuddy/karaf.assembly/" class="btn btn-success pull-right">Download @sonatype</a></h3>
-		                <p>
-		                	In case you prefer to download CIBuddy from Maven you basically have to choices. Either you go for the official Sonatype  <a href="https://oss.sonatype.org/content/groups/public" target="_blank">repository</a>, which will contain snapshot versions along with released versions or you skip adding the repository and obtain your copy directly from Maven Central (however, this might take a while till a new version is pushed, because of the release approval process of mvn central).
-		                	<pre class="prettyprint linenums"><code id="lang-xml">&lt;repositories&gt;
+                  <section id="1.0.0">
+                    <div class="page-header">
+                        <h1>CIBuddy 1.0.0 <small>:: released January 11th, 2013</small></h1>
+                        <p>
+                          This is the initial release of CIBuddy. For a detailed feature list, take a look at <a href="https://github.com/cibuddy/cibuddy/issues?milestone=3&state=closed">this</a> category.
+                        </p>
+                    </div>
+                    <div class="row">
+                      <div class="span2"><a href="https://oss.sonatype.org/content/groups/public/com/cibuddy/karaf.assembly/1.0.0/karaf.assembly-1.0.0.zip"><img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a></div>
+                      <div class="span7">
+                        <strong>Size:</strong> 9.64 MB
+                        <a href="https://oss.sonatype.org/content/groups/public/com/cibuddy/karaf.assembly/1.0.0/karaf.assembly-1.0.0.zip" class="btn btn-success pull-right">Download ZIP&nbsp;</a> <br />
+                        <strong>SHA1:</strong> 17373efa75f7fb07cc2e39bec21e8995ab6a7b4e <br />
+                        <strong>MD5:</strong> 34a9b82360d28a052cddf01ef4195829 <br />
+                        <strong>TAG:</strong>  <a href="https://github.com/cibuddy/cibuddy/tree/cibuddy-1.0.0.2">cibuddy-1.0.0.2</a><br />
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="span2"><a href="https://oss.sonatype.org/content/groups/public/com/cibuddy/karaf.assembly/1.0.0/karaf.assembly-1.0.0.tar.gz"><img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a></div>
+                      <div class="span7">
+                        <strong>Size:</strong> 9.45 MB 
+                        <a href="https://oss.sonatype.org/content/groups/public/com/cibuddy/karaf.assembly/1.0.0/karaf.assembly-1.0.0.tar.gz" class="btn btn-success pull-right">Download TAR</a> <br />
+                        <strong>SHA1:</strong> 620b821622954bd515db6db4a61f1d6dbeecc0e7 <br />
+                        <strong>MD5:</strong> 6d02dc5109fcacb5d87417f467ec6e0c <br />
+                        <strong>TAG:</strong> <a href="https://github.com/cibuddy/cibuddy/tree/cibuddy-1.0.0.2">cibuddy-1.0.0.2</a><br />
+                      </div>
+                    </div>
+                  </section>
+                  <section id="snapshot">
+                    <div class="page-header">
+                            <h1>CIBuddy SNAPSHOT <small>:: working copy</small></h1>
+                            <p>
+                              The most recent feature and bugfix list could be found <a href="https://github.com/cibuddy/cibuddy/issues?state=open">here</a>.
+                            </p>
+                        </div>
+                    <p>
+                      The latest version could be obtained from the maven directory <a href="https://oss.sonatype.org/content/groups/public/com/cibuddy/karaf.assembly/">here</a>. Just pick the latest SNAPSHOT version available. In case you prefer provisioning an already existing Karaf container, you could of course utilize the CIBuddy feature descriptor found in this location: <a href="https://oss.sonatype.org/content/groups/public/com/cibuddy/karaf.features/">https://oss.sonatype.org/content/groups/public/com/cibuddy/karaf.features/</a>. <br />
+                      The XML is annotated with comments, making it simple to choose the correct feature to use.</p>
+                  </section>
+                  <section id="snapshot">
+                    <div class="page-header">
+                      <h1>CIBuddy Source Code <small>:: github repo</small></h1>
+                      <p>In case you want more and would like to obtain the source code using GIT, you could simply execute this command (make sure you're on the master branch):</p>
+                      <pre class="prettyprint">$ git clone git://github.com/cibuddy/cibuddy</pre>
+                    </div>
+                  </section>
+                  <section id="maven">
+                    <div class="page-header">
+                      <h1>Maven Repo <small>:: continously updated</small></h1>
+                      <p>
+                        Binaries from various versions could be obtained from two different Maven locations. SNAPSHOT and release are versions are available from the official Sonatype <a href="https://oss.sonatype.org/content/groups/public" target="_blank">repository</a>, while the released versions are also pushed to Maven Central with a short delay of less than a day.
+                      </p>
+                    </div>
+                    <p>
+                      Maven Sonatype Repository Configuration:
+                      <pre class="prettyprint linenums"><code id="lang-xml">&lt;repositories&gt;
   &lt;repository&gt;
     &lt;id&gt;sonatypeOSSRepo&lt;/id&gt;
     &lt;name&gt;Sonatype OSS Repository&lt;/name&gt;
