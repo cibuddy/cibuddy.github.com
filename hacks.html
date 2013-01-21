@@ -1,0 +1,120 @@
+---
+layout: default
+hacks: "active"
+title: "CIBuddy Hacks"
+description: "Things that have been done with CIBuddy, not fitting in any of the other pages."
+--- 
+
+        <!-- Subhead
+        ================================================== -->
+        <header class="jumbotron subhead" id="overview">
+          <div class="container">
+            <!-- project logo -->
+            <p class="lead">
+              <img src="img/CIBuddyHeader_documentation.png" alt="Hacks Page" />
+            </p>
+             <!-- spacer between logo and first content of page -->
+            <hr />
+             <!-- lead text for the motivation -->
+            <p class="lead">
+              Hacks around CIBuddy. Although this might actually work, it is not guaranteed - try on your own risk!
+            </p>
+          </div>
+        </header>
+        <!-- main content of page -->
+
+        <div class="container">
+            <div class="row">
+                <div class="span3 bs-docs-sidebar">
+                    <ul class="nav nav-list bs-docs-sidenav affix-top">
+                        <li><a href="#raspberry"><i class="icon-chevron-right"></i> Raspberry Pi</a></a>
+                    </ul>
+                </div>
+                <div class="span9">
+                    <!-- 
+
+                                CIBuddy on the Raspberry PI
+
+                    -->
+                    <section id="raspberry">
+                        <div class="page-header">
+                            <h1>CIBuddy on the Raspberry PI</h1>
+                            <p>
+                              The <strong>Raspberry Pi</strong> is currently used in many area's so, why not serve as a low cost host for your CIBuddies? The following section describes how you could use your Raspberry Pi to do exactly that...
+                            </p>
+                        </div>
+                        <h2>Installing the OS (Debian <em>Wheezy</em>)</h2>
+                  			<p>
+                  				Download the <i>Soft-float Debian "<em>Wheezy</em>"</i> image from here: <a href="http://www.raspberrypi.org/downloads">http://www.raspberrypi.org/downloads</a> and follow the instructions on the Raspberry PI website: <a href="http://elinux.org/RPi_Easy_SD_Card_Setup">http://elinux.org/RPi_Easy_SD_Card_Setup</a>. At the time of writing, the command to create the SD-card image was like this:
+                  			</p>
+                        <pre class="prettyprint"><code>europe ~ $ sudo dd if=/Users/europe/Downloads/2012-08-08-wheezy-armel.img of=/dev/disk2 bs=1m</code></pre>
+                        <p>
+                          Once you created the image, you could us the sd-card to boot your Raspberry Pi for the first time. Use the credentials provided with the download (used to be this - bn: pi / pw: raspberry). In case you're booting without a monitor, you could connect using ssh. 
+                        </p>
+                  			<h2>Install Java on your vanilla Raspberry Pi</h2>
+                        <p>
+                  				To get Java on the device you have to options. First you could us the OpenJDK, which is really streight forward by calling:
+                        </p>
+                        <pre class="prettyprint"><code>pi@raspberrypi ~ $ sudo apt-get install openjdk-7-jdk</code></pre>
+                        <p> 
+                          Do this and you're good to go. From my experiences however, this work for sure, but it doesn't perform very well. The JDK is not optimized for the processor and you're have a noticible lag in basically everything. That's why in many cases the second possibility comes in handy. Oracle offers an optimized embedded version, which is noticible faster. To use that one, all you have to do is download the binary from here: <a href="http://www.oracle.com/technetwork/java/embedded/downloads/javase/index.html">http://www.oracle.com/technetwork/java/embedded/downloads/javase/index.html</a>. 
+                          <div class="alert">
+                            <strong>Attention!</strong><br />
+                            Use the "<em>ARMv6/7 Linux - Headless EABI, VFP, SoftFP ABI, Little Endian</em>" version.<br />
+                            The Server version will <strong>NOT</strong> work - you've been warned!
+                          </div>
+                  				Here, this version was used: <b>ejre-7u6-fcs-b24-linux-arm-vfp-client_headless-10_aug_2012.tar.gz</b> (there might be a newer version available now). Once you downloaded the JVM, just copy it over to the home folder of your Raspberry Pi (with scp for instance) and following these few steps:
+                        </p>
+
+<pre class="prettyprint"><code>pi@raspberrypi ~ $ sudo mkdir /usr/java
+pi@raspberrypi ~ $ cd /usr/java
+// adapt the name of the file according to your needs
+pi@raspberrypi /usr/java $ sudo tar xzf /home/pi/ejre-7u6-fcs-b24-linux-arm-vfp-client_headless-10_aug_2012.gz
+// you could remove the .gz to safe some space
+pi@raspberrypi /usr/java $ rm /home/pi/ejre-7u6-fcs-b24-linux-arm-vfp-client_headless-10_aug_2012.gz
+// make sym-link for easier usage
+pi@raspberrypi /usr/java $ sudo ln -s /usr/java/ejre1.7.0_06/bin/java /usr/bin</code></pre>
+                        <p>
+                          That's it. You could check if everything works as expected with calling:
+                        </p>
+                        <pre class="prettyprint"><code>pi@raspberrypi /usr/java $ java -version
+java version "1.7.0_06"
+Java(TM) SE Embedded Runtime Environment (build 1.7.0_06-b24, headless)
+Java HotSpot(TM) Embedded Client VM (build 23.2-b09, mixed mode)</code></pre>
+                        <h2>Install the USB drivers (if neccessary)</h2>
+                        <p>
+                          Usually the Debian distribution comes by default with the correct drivers installed. To make sure everything works, double check by reinstalling the driver:
+                        </p>
+                        <pre class="prettyprint"><code>pi@raspberrypi ~ $ sudo apt-get install libusb-1.0-0</code></pre>
+
+                        <h2>Install CIBuddy</h2>
+                        <p>
+                          The installation of CIBuddy is now like on a regular Linux. For the readers convenience, here are the steps:
+                        </p>
+                        <pre class="prettyprint"><code>pi@raspberrypi ~ $ sudo mkdir /usr/cibuddy
+pi@raspberrypi ~ $ cd /usr/cibuddy
+// get the latest binary (at the time of writing it was 1.0.0)
+pi@raspberrypi /usr/cibuddy $ sudo wget http://search.maven.org/remotecontent?filepath=com/cibuddy/karaf.assembly/1.0.0/karaf.assembly-1.0.0.tar.gz
+pi@raspberrypi /usr/cibuddy $ sudo tar xzf karaf.assembly-1.0.0.tar.gz
+// remove the obsolete assembly to safe space
+pi@raspberrypi /usr/cibuddy $ sudo rm karaf.assembly-1.0.0.tar.gz 
+pi@raspberrypi /usr/cibuddy $ cd karaf.assembly-1.0.0/bin/
+pi@raspberrypi /usr/cibuddy/karaf.assembly-1.0.0/bin $ sudo ./karaf</code></pre>
+                        <p>
+                          By now, you have a running CIBuddy installation. In case you have a connected device, you could quickly test it by installing a quick test (just replace <em>install</em> with <em>uninstall</em> in case you want to get ride of it again):
+                        </p>
+                        <pre class="prettyprint"><code>karaf@CIBuddy&gt; feature:install cibuddy-oss-conf
+karaf@CIBuddy&gt; feature:install cibuddy-test-conf
+</code></pre>
+                        <h2>Conclusion</h2>
+                        <p>
+                          As shown, using the Raspberry Pi is really simple and allows for a very cheap CI status server. However, when testing the setup, you'll notice that it is just not as stable as on a standard pc. The JVM's are all relatively slow, the binaries are not optimized for the processor and with the Oracle JVM there is even a bug, that the JVM dies when trying to load a native binary that doesn't match the cpu architecture. Furthermore, the Raspberry (Gen 2. at least) seems to not work well with the delcom lights. As soon as one of those got connected (no matter what was installed on the Raspberry Pi in the first place), the light went on shortly and then the entire Raspberry Pi stops responding. Sure, most of these issues aren't that big and will most likely be fixed soon, but one should keep those in mind. If you can live with these small early adopters flaws, you get a really neat little peace of hardware. Happy Hacking! :-)
+                        </p>
+
+                        <div class="alert alert-error">
+                          <strong>Attention:</strong> Before you start using the Raspberry Pi, please make sure you read and understood the conclusion!
+                        </div>
+                    </section>
+                </div> <!-- span -->
+            </div> <!-- row -->
+        </div> <!-- container -->
